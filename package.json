@@ -12,7 +12,7 @@
     "lazy-loading"
   ],
   "author": "Pritesh Panjiker",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
