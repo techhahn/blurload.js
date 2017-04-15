@@ -117,19 +117,36 @@
 	            var windowTop = window.scrollY || window.pageYOffset,
 	                windowHeight = windowTop + window.innerHeight,
 	                elementTop = image.offsetTop,
-	                elementTopnHeight = elementTop + image.height;
+	                elementTopnHeight = elementTop + image.offsetHeight;
+	                
 	                return elementTopnHeight >= windowTop && elementTop <= windowHeight;
 	        });
 	
 	        this.images = difference(this.images, inview);
 	
 	        this.lazyLoadImage(inview);
-	        // !images.length ? $w.off("scroll resize lookup", reveal) : '';
 	    }
 	
 	    lazyLoadImage($images = null) {
 	        $images.map((img) => {
-	            console.log(img);
+	
+	            const isImage = img.tagName.toLowerCase() == 'img';
+	            const bigImg = document.createElement('img');
+	            const bigImgSrc = img.getAttribute('data-url');
+	            bigImg.className += ' full-image'; 
+	            bigImg.setAttribute('src', bigImgSrc);
+	
+	            bigImg.onload = () => {
+	                if (isImage) {
+	                    img.parentNode.lastChild == img ? img.parentNode.appendChild(bigImg) : img.parentNode.insertBefore(bigImg, img.nextSibling.nextSibling);
+	                }
+	                else {
+	                    const divEl = document.createElement('div');
+	                    divEl.className += ' full-image';
+	                    divEl.style.backgroundImage = `url(${bigImgSrc})`;
+	                    img.parentNode.lastChild == img ? img.parentNode.appendChild(divEl) : img.parentNode.insertBefore(divEl, img.nextSibling.nextSibling);                    
+	                }
+	            }
 	        });
 	    }
 	
@@ -138,9 +155,8 @@
 	
 	            if(el.className.indexOf('initialized') === -1) {
 	                el.className += " initialized";
-	
 	                const c = document.createElement('canvas');
-	                c.setAttribute('id', 'canvas-' + index);
+	                c.setAttribute('id', `canvas-${index}`);
 	                c.height = el.offsetHeight;
 	                c.width = el.offsetWidth;
 	                el.parentNode.lastChild == el ? el.parentNode.appendChild(c) : el.parentNode.insertBefore(c, el.nextSibling);
