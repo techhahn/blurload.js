@@ -1,0 +1,22 @@
+{
+  "name": "blurload.js",
+  "version": "1.0.0",
+  "description": "Load your images instgram style",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Blurload",
+    "blurimage",
+    "lazy-loading"
+  ],
+  "author": "Pritesh Panjiker",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.4.0",
+    "lodash": "^4.17.4"
+  }
+}
