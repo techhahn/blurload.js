@@ -1,2 +1,4 @@
 # blurload.js
-Load your images medium style. 
+## Lazy load your images medium style.
+
+
